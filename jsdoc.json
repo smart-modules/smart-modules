@@ -1,0 +1,30 @@
+{
+  "opts": {
+    "template": "node_modules/jsdoc-template",
+    "encoding": "utf8",
+    "destination": "docs",
+    "recurse": true,
+    "readme": "README.md"
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc"]
+  },
+  "source": {
+    "include": ["packages"],
+    "exclude": [],
+    "includePattern": ".+\\.js$",
+    "excludePattern": "(^|\\/|\\\\)_|.+\\.spec.js"
+  },
+  "sourceType": "script",
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": false,
+    "referenceTitle": "Smart-Modules",
+    "disableSort": false
+  },
+  "plugins": ["plugins/markdown"],
+  "markdown": {
+    "excludeTags": ["author", "license"]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "name": "@anandsuresh/smart-modules",
+  "version": "0.0.0",
+  "description": "smart modules",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anandsuresh/smart-modules.git"
+  },
+  "author": "Anand Suresh",
+  "bugs": {
+    "url": "https://github.com/anandsuresh/smart-modules/issues"
+  },
+  "homepage": "https://github.com/anandsuresh/smart-modules#readme",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "clean": "lerna exec -- rm -rf node_modules package-lock.json; rm -rf node_modules package-lock.json",
+    "coverage": "nyc npm test",
+    "doc": "jsdoc --configure jsdoc.json",
+    "lint": "standard",
+    "lint-fix": "standard --fix",
+    "install": "lerna bootstrap",
+    "test": "mocha --ui bdd --reporter spec --timeout 30000 --recursive modules/**/spec/*.spec.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "jsdoc": "^3.6.3",
+    "jsdoc-template": "braintree/jsdoc-template",
+    "lerna": "^3.19.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "standard": "^14.3.1"
+  },
+  "standard": {
+    "ignore": [
+      "docs"
+    ],
+    "globals": [
+      "after",
+      "afterEach",
+      "before",
+      "beforeEach",
+      "context",
+      "describe",
+      "expect",
+      "it"
+    ]
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 99,
+    "statements": 99,
+    "functions": 99,
+    "branches": 99,
+    "include": [
+      "modules/**/*.js"
+    ],
+    "exclude": [
+      "modules/**/spec/*.js"
+    ],
+    "reporter": [
+      "html",
+      "lcov",
+      "text-summary"
+    ],
+    "require": [],
+    "extension": [],
+    "cache": true,
+    "all": true,
+    "report-dir": "./coverage"
+  }
+}
