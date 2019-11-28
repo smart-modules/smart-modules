@@ -25,7 +25,9 @@
     "install": "lerna bootstrap",
     "test": "mocha --ui bdd --reporter spec --timeout 30000 --recursive modules/**/spec/*.spec.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@smart-modules/timer": "file:modules/timer"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "jsdoc": "^3.6.3",

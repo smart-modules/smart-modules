@@ -1,0 +1,7 @@
+{
+  "name": "@smart-modules/timer",
+  "version": "0.0.0",
+  "description": "A smart-timer implementation",
+  "license": "MIT",
+  "main": "lib/timer.js"
+}
