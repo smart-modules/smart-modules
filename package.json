@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@smart-modules/error": "file:modules/error",
+    "@smart-modules/queue": "file:modules/queue",
     "@smart-modules/stream": "file:modules/stream",
     "@smart-modules/timer": "file:modules/timer"
   },
