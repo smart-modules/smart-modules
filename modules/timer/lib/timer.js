@@ -103,7 +103,7 @@ class SmartTimer extends EventEmitter {
     if (!this._destroyed) {
       this._hadActivity = true
     } else {
-      throw new Error(`timer has already been destroyed!`)
+      throw new Error('timer has already been destroyed!')
     }
   }
 

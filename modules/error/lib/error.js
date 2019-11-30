@@ -121,7 +121,7 @@ class SmartError extends Error {
    */
   static create (name, errors) {
     if (typeof name !== 'string') {
-      throw new TypeError(`SmartError must have a valid name!`)
+      throw new TypeError('SmartError must have a valid name!')
     }
 
     if (typeof errors !== 'object' || Object.keys(errors).length === 0) {
