@@ -1,7 +1,22 @@
 {
-  "lerna": "3.15.0",
+  "lerna": "3.19.0",
   "version": "independent",
   "packages": [
     "modules/*"
-  ]
+  ],
+  "command": {
+    "version": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
+      "createRelease": "github",
+      "message": "chore: publish",
+      "yes": true
+    },
+    "publish": {
+      "allowBranch": ["master"],
+      "ignoreChanges": ["*.md"],
+      "message": "chore: publish",
+      "yes": true
+    }
+  }
 }

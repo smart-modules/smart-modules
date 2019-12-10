@@ -1,0 +1,55 @@
+name: Publish
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  publish-npm:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Git identity
+        run: git config --global user.name '@anandsuresh' && git config --global user.email 'anandsuresh@users.noreply.github.com' && git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare repository
+        run: git checkout "${GITHUB_REF:11}"
+      - name: Pulling
+        run: git pull
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+          scope: '@smart-modules'
+      - run: npm ci
+      - run: lerna publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          GH_TOKEN:: ${{secrets.GITHUB_TOKEN}}
+
+  publish-gpr:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Git identity
+        run: git config --global user.name '@anandsuresh' && git config --global user.email 'anandsuresh@users.noreply.github.com' && git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare repository
+        run: git checkout "${GITHUB_REF:11}"
+      - name: Pulling
+        run: git pull
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@smart-modules'
+      - run: npm ci
+      - run: lerna publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN:: ${{secrets.GITHUB_TOKEN}}
