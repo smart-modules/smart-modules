@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "description": "A smart-stream implementation",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smart-modules/smart-modules.git",
+    "directory": "modules/stream"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/stream.js",
   "dependencies": {
     "@smart-modules/error": "file:../error",

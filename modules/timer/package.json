@@ -3,5 +3,13 @@
   "version": "0.0.0",
   "description": "A smart-timer implementation",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smart-modules/smart-modules.git",
+    "directory": "modules/timer"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/timer.js"
 }

@@ -96,6 +96,8 @@ describe('SmartStream', function () {
             sourceEncoding === targetEncoding
               ? expect(target).to.equal(source)
               : expect(target).to.not.equal(source)
+
+            source.destroy() // cleanup
           })
         }
       }

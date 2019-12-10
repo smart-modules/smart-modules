@@ -3,5 +3,13 @@
   "version": "0.0.0",
   "description": "A sub-class of the JavaScript Error object implementing smart features",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smart-modules/smart-modules.git",
+    "directory": "modules/error"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/error.js"
 }

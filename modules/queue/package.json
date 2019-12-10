@@ -3,5 +3,13 @@
   "version": "0.0.0",
   "description": "A smart-queue implementation that supports multiple strategies for enqueueing on a full queue.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smart-modules/smart-modules.git",
+    "directory": "modules/queue"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/queue.js"
 }
