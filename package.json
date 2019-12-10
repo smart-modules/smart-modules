@@ -27,6 +27,7 @@
     "test": "mocha --ui bdd --reporter spec --timeout 60000 --recursive modules/**/spec/*.spec.js"
   },
   "dependencies": {
+    "@smart-modules/error": "file:modules/error",
     "@smart-modules/timer": "file:modules/timer"
   },
   "devDependencies": {

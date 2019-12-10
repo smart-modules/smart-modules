@@ -1,0 +1,7 @@
+{
+  "name": "@smart-modules/error",
+  "version": "0.0.0",
+  "description": "A sub-class of the JavaScript Error object implementing smart features",
+  "license": "MIT",
+  "main": "lib/error.js"
+}
