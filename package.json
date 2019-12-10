@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@smart-modules/error": "file:modules/error",
+    "@smart-modules/stream": "file:modules/stream",
     "@smart-modules/timer": "file:modules/timer"
   },
   "devDependencies": {

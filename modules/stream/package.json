@@ -1,0 +1,14 @@
+{
+  "name": "@smart-modules/stream",
+  "version": "0.0.0",
+  "description": "A smart-stream implementation",
+  "license": "MIT",
+  "main": "lib/stream.js",
+  "dependencies": {
+    "@smart-modules/error": "file:../error",
+    "@smart-modules/timer": "file:../timer",
+    "mime": "^2.4.4",
+    "msgpack5": "^4.2.0",
+    "readable-stream": "^3.4.0"
+  }
+}
