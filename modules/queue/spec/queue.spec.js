@@ -66,7 +66,9 @@ describe('SmartQueue', () => {
         const queue = SmartQueue.create({ size: 1, strategy: 'drop' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.dequeue()).to.deep.equal({ foo: 'bar' })
-        expect(() => queue.dequeue()).to.throw()
+        expect(queue.length).to.equal(0)
+        // eslint-disable-next-line no-unused-expressions
+        expect(queue.dequeue()).to.be.undefined
         expect(queue.length).to.equal(0)
       })
     })
@@ -104,7 +106,8 @@ describe('SmartQueue', () => {
         const queue = SmartQueue.create({ size: 1, strategy: 'overwrite' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.dequeue()).to.deep.equal({ foo: 'bar' })
-        expect(() => queue.dequeue()).to.throw()
+        // eslint-disable-next-line no-unused-expressions
+        expect(queue.dequeue()).to.be.undefined
         expect(queue.length).to.equal(0)
       })
     })
