@@ -45,6 +45,7 @@ jobs:
 
   publish-npm:
     runs-on: ubuntu-latest
+    needs: publish-gpr
     steps:
       - name: checkout branch
         uses: actions/checkout@v1
@@ -73,7 +74,7 @@ jobs:
         run: npm ci
 
       - name: publish to the NPM Registry
-        run: npx lerna publish --no-verify-access --registry https://registry.npmjs.org/
+        run: npx lerna publish from-git --no-verify-access --registry https://registry.npmjs.org/
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
