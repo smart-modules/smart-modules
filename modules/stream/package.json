@@ -1,6 +1,6 @@
 {
   "name": "@smart-modules/stream",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A smart-stream implementation",
   "license": "MIT",
   "repository": {
