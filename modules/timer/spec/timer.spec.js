@@ -6,8 +6,8 @@
 const { expect } = require('chai')
 const SmartTimer = require('../lib/timer')
 
-describe('SmartTimer', () => {
-  describe('instantiation', () => {
+describe('SmartTimer', function () {
+  describe('instantiation', function () {
     it('must not be instantiable with invalid arguments', function () {
       [
         [{ timeout: -2000, interval: 2000 }, () => {}],
@@ -18,7 +18,7 @@ describe('SmartTimer', () => {
       })
     })
 
-    it('must be instantiable with valid arguments', () => {
+    it('must be instantiable with valid arguments', function () {
       [
         [],
         [null],
@@ -47,7 +47,7 @@ describe('SmartTimer', () => {
     })
   })
 
-  describe('operation', () => {
+  describe('operation', function () {
     it('must emit a `timeout` event when the timer times out', (done) => {
       const props = { timeout: 500, interval: 100 }
       SmartTimer.create(props)

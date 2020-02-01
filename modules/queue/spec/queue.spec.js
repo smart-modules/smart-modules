@@ -6,8 +6,8 @@
 const { expect } = require('chai')
 const SmartQueue = require('../lib/queue')
 
-describe('SmartQueue', () => {
-  describe('instantiation', () => {
+describe('SmartQueue', function () {
+  describe('instantiation', function () {
     it('must not be instantiable with invalid arguments', function () {
       [
         [{ strategy: 'unknown' }],
@@ -18,7 +18,7 @@ describe('SmartQueue', () => {
       })
     })
 
-    it('must be instantiable with valid arguments', () => {
+    it('must be instantiable with valid arguments', function () {
       [
         [],
         [null],
@@ -40,29 +40,29 @@ describe('SmartQueue', () => {
     })
   })
 
-  describe('operation', () => {
-    describe('strategy: drop', () => {
-      it('must enqueue new data when space is available', () => {
+  describe('operation', function () {
+    describe('strategy: drop', function () {
+      it('must enqueue new data when space is available', function () {
         const queue = SmartQueue.create({ size: 1, strategy: 'drop' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.length).to.equal(1)
       })
 
-      it('must not enqueue new data when space is not available', () => {
+      it('must not enqueue new data when space is not available', function () {
         const queue = SmartQueue.create({ size: 1, strategy: 'drop' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.enqueue({ bar: 'baz' })).to.equal(false)
         expect(queue.length).to.equal(1)
       })
 
-      it('must dequeue data when available', () => {
+      it('must dequeue data when available', function () {
         const queue = SmartQueue.create({ size: 1, strategy: 'drop' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.dequeue()).to.deep.equal({ foo: 'bar' })
         expect(queue.length).to.equal(0)
       })
 
-      it('must not dequeue data when not available', () => {
+      it('must not dequeue data when not available', function () {
         const queue = SmartQueue.create({ size: 1, strategy: 'drop' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.dequeue()).to.deep.equal({ foo: 'bar' })
@@ -73,14 +73,14 @@ describe('SmartQueue', () => {
       })
     })
 
-    describe('strategy: overwrite', () => {
-      it('must enqueue new data when space is available', () => {
+    describe('strategy: overwrite', function () {
+      it('must enqueue new data when space is available', function () {
         const queue = SmartQueue.create({ size: 1, strategy: 'overwrite' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.length).to.equal(1)
       })
 
-      it('must enqueue new data when space is not available', () => {
+      it('must enqueue new data when space is not available', function () {
         const queue = SmartQueue.create({ size: 2, strategy: 'overwrite' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.length).to.equal(1)
@@ -95,14 +95,14 @@ describe('SmartQueue', () => {
         expect(queue.length).to.equal(0)
       })
 
-      it('must dequeue data when available', () => {
+      it('must dequeue data when available', function () {
         const queue = SmartQueue.create({ size: 1, strategy: 'overwrite' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.dequeue()).to.deep.equal({ foo: 'bar' })
         expect(queue.length).to.equal(0)
       })
 
-      it('must not dequeue data when not available', () => {
+      it('must not dequeue data when not available', function () {
         const queue = SmartQueue.create({ size: 1, strategy: 'overwrite' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.dequeue()).to.deep.equal({ foo: 'bar' })
@@ -112,7 +112,7 @@ describe('SmartQueue', () => {
       })
     })
 
-    describe('strategy: grow', () => {
+    describe('strategy: grow', function () {
       const queue = SmartQueue.create()
 
       it('must enqueue data as long as there is memory available (64Mb heap usage)', function (done) {
