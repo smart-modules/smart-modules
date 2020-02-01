@@ -104,6 +104,12 @@ describe('SmartQueue', () => {
         const queue = SmartQueue.create({ size: 1, strategy: 'overwrite' })
         expect(queue.enqueue({ foo: 'bar' })).to.equal(true)
         expect(queue.dequeue()).to.deep.equal({ foo: 'bar' })
+        try {
+          queue.dequeue()
+          throw new Error('should have thrown but did not!')
+        } catch (err) {
+          console.error(err)
+        }
         expect(() => queue.dequeue()).to.throw()
         expect(queue.length).to.equal(0)
       })
