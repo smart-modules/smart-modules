@@ -7,21 +7,19 @@
     "readme": "README.md"
   },
   "tags": {
-    "allowUnknownTags": true,
+    "allowUnknownTags": false,
     "dictionaries": ["jsdoc"]
   },
   "source": {
-    "include": ["packages"],
-    "exclude": [],
-    "includePattern": ".+\\.js$",
-    "excludePattern": "(^|\\/|\\\\)_|.+\\.spec.js"
+    "include": ["modules"],
+    "excludePattern": ".+\\.spec\\.js$"
   },
-  "sourceType": "script",
+  "sourceType": "module",
   "templates": {
     "cleverLinks": true,
     "monospaceLinks": false,
     "referenceTitle": "Smart-Modules",
-    "disableSort": false
+    "disableSort": true
   },
   "plugins": ["plugins/markdown"],
   "markdown": {

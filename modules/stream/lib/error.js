@@ -1,5 +1,6 @@
 /**
  * @file Defines errors for the SmartStream
+ * @private
  */
 'use strict'
 

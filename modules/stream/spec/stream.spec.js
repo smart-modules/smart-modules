@@ -1,5 +1,5 @@
 /**
- * @file Unit tests for `SmartStream`
+ * @file Behavioral specification for the `SmartStream` class
  */
 'use strict'
 

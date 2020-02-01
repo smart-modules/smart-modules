@@ -1,5 +1,5 @@
 /**
- * @file Unit tests for SmartError
+ * @file Behavioral specification for the `SmartError` class
  */
 'use strict'
 

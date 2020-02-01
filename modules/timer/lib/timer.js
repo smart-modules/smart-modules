@@ -1,5 +1,5 @@
 /**
- * @file Implements a smart-timer
+ * @file A timer that avoids frequently polling the clock
  */
 'use strict'
 

@@ -1,7 +1,7 @@
 {
   "name": "@smart-modules/queue",
   "version": "0.1.0",
-  "description": "A smart-queue implementation that supports multiple strategies for enqueueing on a full queue.",
+  "description": "A queue implementation that supports multiple strategies for enqueueing on a full queue.",
   "license": "MIT",
   "repository": {
     "type": "git",

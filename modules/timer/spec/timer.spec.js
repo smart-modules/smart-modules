@@ -1,5 +1,5 @@
 /**
- * @file Unit tests for the SmartTimer
+ * @file Behavioral specification for the `SmartTimer` class
  */
 'use strict'
 

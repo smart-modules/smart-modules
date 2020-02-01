@@ -1,5 +1,6 @@
 /**
  * @file Utility functions
+ * @private
  */
 'use strict'
 
@@ -146,8 +147,10 @@ function streamToBuffer (stream) {
 
 /**
  * Returns the MIME-type of the specified file
+ *
  * @param {String} path Path to the file whose MIME-type is to be retrived
  * @returns {String}
+ * @private
  */
 function getContentType (path) {
   const extension = extname(path)
@@ -163,8 +166,10 @@ function getContentType (path) {
 
 /**
  * Returns the encoding of the specified file
+ *
  * @param {String} path Path to the file whose encoding is to be retrived
  * @returns {String}
+ * @private
  */
 function getContentEncoding (path) {
   switch (extname(path)) {

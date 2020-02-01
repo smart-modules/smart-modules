@@ -1,5 +1,6 @@
 /**
- * @file Implements a smart-queue
+ * @file A queue implementation that supports multiple strategies for enqueueing
+ * on a full queue.
  */
 'use strict'
 
@@ -37,6 +38,10 @@ const DEFAULT_PROPS = {
 class SmartQueue extends EventEmitter {
   /**
    * Constructs a `SmartQueue` instance
+   *
+   * NOTE: Not intended for direct use through `new`. Use the
+   * {@link SmartQueue.create} instead.
+   *
    * @param {Object} [props] Properties of the queue
    * @param {String} [props.strategy='grow'] The enqueuing strategy to use
    * @param {Number} [props.size=Infinity] The size of the queue
@@ -90,10 +95,10 @@ class SmartQueue extends EventEmitter {
   }
 
   /**
-   * Enqueues a single data item in the queue
+   * Enqueues a single data item in the queue, returning true, if the data was
+   * successfully enqueued; false otherwise.
    * @param {*} data The data to be enqueued
-   * @returns {Boolean} true, if the data was successfully enqueued; false
-   * otherwise
+   * @returns {Boolean}
    */
   enqueue (data) {
     if (this._length < this._size) {
@@ -124,8 +129,9 @@ class SmartQueue extends EventEmitter {
   }
 
   /**
-   * Dequeues a single data item from the queue
-   * @returns {*|undefined} The data that was dequeue'd, if any; else undefined
+   * Dequeues a single data item from the queue returning the data that was
+   * dequeued, if any; undefined otherwise.
+   * @returns {*|undefined}
    */
   dequeue () {
     if (this._length > 0) {
@@ -135,8 +141,6 @@ class SmartQueue extends EventEmitter {
       this._length--
       return data
     }
-
-    throw new Error('Attempted to dequeue on an empty queue!')
   }
 
   /**
@@ -150,7 +154,9 @@ class SmartQueue extends EventEmitter {
 
   /**
    * Functional form of instantiating a SmartQueue
-   * @param {Object} [props] Properties of the queue; @see {SmartQueue}
+   * @param {Object} [props] Properties of the queue
+   * @param {String} [props.strategy='grow'] The enqueuing strategy to use
+   * @param {Number} [props.size=Infinity] The size of the queue
    * @returns {SmartQueue}
    */
   static create (props) {

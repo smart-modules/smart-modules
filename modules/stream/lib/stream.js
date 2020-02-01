@@ -3,9 +3,9 @@
  */
 'use strict'
 
+const SmartTimer = require('@smart-modules/timer')
 const SmartStreamError = require('./error')
 const Util = require('./util')
-const SmartTimer = require('@smart-modules/timer')
 const { createReadStream, stat } = require('fs')
 const { Transform } = require('stream')
 

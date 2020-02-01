@@ -1,5 +1,5 @@
 /**
- * @file Unit tests for the SmartQueue
+ * @file Behavioral specification for the `SmartQueue` class
  */
 'use strict'
 

@@ -1,27 +1,28 @@
 /**
- * @file Implements a base class for errors
+ * @file Implements a base class for errors, allowing for wrapping underlying
+ * causes with state to aid subsequent debugging.
  */
 'use strict'
 
 /**
- * A base class for all errors providing optional metadata and wrapping the
- * underlying cause of the error.
- *
  * This wrapper around the JavaScript `Error` class provides the means to
  * capture stack traces with additional metadata that would be useful for
  * subsequent debugging of the error.
- *
  * @extends Error
  */
 class SmartError extends Error {
   /**
    * Constructs an instance of `SmartError`
+   *
+   * NOTE: Not intended for direct use through `new`. Use the
+   * {@link SmartError.create} instead.
+   *
    * @param {String} message Human-readable description of the error
    * @param {Object} props Properties of the error
    * @param {String} [props.code] A unique error code
    * @param {*} [props.metadata] Optional metadata for the error
    * @param {Error} [props.cause] Optional error that was originally thrown
-   * @param {String} [props.stack] Optional override stack trace for the error
+   * @param {String} [props.stack] Optional override stack trace for the error;
    * Useful for reconstructing error objects from logs
    */
   constructor (message, props) {
@@ -56,8 +57,22 @@ class SmartError extends Error {
 
     super(message)
 
+    /**
+     * A human-readable description of the error
+     * @type {String}
+     */
     this.code = props.code
+
+    /**
+     * Optional metadata describing the error.
+     * @type {*}
+     */
     this.metadata = props.metadata
+
+    /**
+     * Optional error that was originally thrown
+     * @type {Error}
+     */
     this.cause = props.cause
 
     /* istanbul ignore if */
@@ -115,7 +130,7 @@ class SmartError extends Error {
 
   /**
    * Functional form of sub-classing a SmartError
-   * @param {String} name The name of the error
+   * @param {String} name The name of the new Error sub-class
    * @param {Object<String>} errors A list of error codes and messages
    * @returns {Function}
    */

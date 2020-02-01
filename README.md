@@ -7,4 +7,4 @@
 [![follow on twitter](https://img.shields.io/twitter/follow/anandsuresh.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=anandsuresh)
 
 
-The smart-modules [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md)!
+The smart-modules [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) provides a set of smart JavaScript components that allow for more expressive and readable code and eliminate common errors.
