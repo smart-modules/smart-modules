@@ -1,6 +1,6 @@
 {
   "name": "@smart-modules/error",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Implements a base class for errors, allowing for wrapping underlying causes with state to aid subsequent debugging.",
   "license": "MIT",
   "repository": {
