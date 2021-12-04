@@ -4,7 +4,6 @@
  */
 'use strict'
 
-const { PassThrough } = require('readable-stream')
 const { extname } = require('path')
 const qs = require('querystring')
 const zlib = require('zlib')
@@ -48,7 +47,9 @@ function deserialize (type, data) {
   switch (type) {
     case 'application/json': {
       const val = JSON.parse(data.toString('utf8'))
-      return (val === 'null') ? null : val
+      return (val !== 'null')
+        ? val
+        : /* istanbul ignore next */ null
     }
 
     case 'application/msgpack':
@@ -73,21 +74,19 @@ function deserialize (type, data) {
 function compress (type, data) {
   let stream
 
+  // istanbul ignore else
   if (type === 'deflate') {
     stream = zlib.createDeflate()
   } else if (type === 'gzip') {
     stream = zlib.createGzip()
-  } else if (type === 'identity') {
-    stream = Buffer.isBuffer(data) ? new PassThrough() : data
   } else {
-    // istanbul ignore next
     throw SmartStreamError.Unexpected(`unknown compression "${type}"!`)
   }
 
   // istanbul ignore if
   if (Buffer.isBuffer(data)) {
     stream.end(data)
-  } else if (data !== stream) {
+  } else /* istanbul ignore else */ if (data !== stream) {
     data.pipe(stream)
   }
 
@@ -105,21 +104,19 @@ function compress (type, data) {
 function decompress (type, data) {
   let stream
 
+  // istanbul ignore else
   if (type === 'deflate') {
     stream = zlib.createInflate()
   } else if (type === 'gzip') {
     stream = zlib.createGunzip()
-  } else if (type === 'identity') {
-    stream = Buffer.isBuffer(data) ? new PassThrough() : data
   } else {
-    // istanbul ignore next
     throw SmartStreamError.Unexpected(`unknown compression "${type}"!`)
   }
 
   // istanbul ignore if
   if (Buffer.isBuffer(data)) {
     stream.end(data)
-  } else if (data !== stream) {
+  } else /* istanbul ignore else */ if (data !== stream) {
     data.pipe(stream)
   }
 
@@ -137,9 +134,9 @@ function streamToBuffer (stream) {
   return new Promise((resolve, reject) => {
     const chunks = []
     stream
-      .on('data', c => chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)))
+      .on('data', chunk => chunks.push(chunk))
       .once('end', () => resolve(Buffer.concat(chunks)))
-      .once('error', err => err.isSmartStreamError
+      .once('error', /* istanbul ignore next */ err => err.isSmartStreamError
         ? reject(err)
         : reject(SmartStreamError.Unexpected({ stream }, err)))
   })

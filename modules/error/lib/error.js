@@ -110,10 +110,10 @@ class SmartError extends Error {
       result.cause = (cause instanceof SmartError)
         ? cause.toJSON()
         : {
-          code: cause.code,
-          message: cause.message,
-          stack: cause.stack
-        }
+            code: cause.code,
+            message: cause.message,
+            stack: cause.stack
+          }
     }
 
     return result
