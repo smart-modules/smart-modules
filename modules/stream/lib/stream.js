@@ -120,12 +120,12 @@ class SmartStream extends Transform {
           this._contentLength = this._size
         }
 
-        cb(err == null
-          ? null
-          : err.isSmartStreamError
-            ? err
-            // istanbul ignore next
-            : SmartStreamError.Unexpected(err))
+        // istanbul ignore else
+        if (err == null || err.isSmartStreamError) {
+          cb(err)
+        } else {
+          cb(SmartStreamError.Unexpected(err))
+        }
       }
     })
 
@@ -310,6 +310,10 @@ class SmartStream extends Transform {
    * When the target encoding matches the source, `this` instance is returned.
    * Otherwise, a new SmartStream instance is created from the current instance.
    *
+   * When a new SmartStream instance is created, the limit and timeout checks
+   * are disabled on the newly created stream, instead relying on the parent to
+   * handle such checks.
+   *
    * @param {String} contentEncoding The encoding of the stream
    * @returns {SmartStream}
    */
@@ -325,10 +329,10 @@ class SmartStream extends Transform {
       // compress, if the source is identity-encoded
       ? Util.compress(target, this)
       : (target === 'identity')
-        // decompress, if the target is identity-encoded
-        ? Util.decompress(source, this)
-        // otherwise, decompress and re-compress
-        : Util.compress(target, Util.decompress(source, this))
+          // decompress, if the target is identity-encoded
+          ? Util.decompress(source, this)
+          // otherwise, decompress and re-compress
+          : Util.compress(target, Util.decompress(source, this))
 
     return this.constructor.fromStream(stream, Object.assign(this.toJSON(), {
       contentEncoding,

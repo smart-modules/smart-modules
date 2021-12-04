@@ -7,6 +7,7 @@ const { expect } = require('chai')
 const { join } = require('path')
 const { createReadStream, readFileSync } = require('fs')
 const SmartStream = require('../lib/stream')
+const SmartStreamError = require('../lib/error')
 
 describe('SmartStream', function () {
   let stream = null
@@ -79,12 +80,10 @@ describe('SmartStream', function () {
 
       for (const sourceEncoding of Object.keys(ENCODINGS)) {
         for (const targetEncoding of Object.keys(ENCODINGS)) {
-          const instance = sourceEncoding === targetEncoding
-            ? 'the same instance'
-            : 'a new instance'
+          const isSameEncoding = sourceEncoding === targetEncoding
           const fromTo = `from ${sourceEncoding} to ${targetEncoding}`
 
-          it(`returns ${instance} transcoding ${fromTo}`, async function () {
+          it(`must correctly transcode ${fromTo}`, async function () {
             const source = SmartStream.fromFile(ENCODINGS[sourceEncoding])
             expect(source.contentType).to.equal('image/jpeg')
             expect(source.contentEncoding).to.equal(sourceEncoding)
@@ -93,11 +92,13 @@ describe('SmartStream', function () {
             expect(target.contentType).to.equal('image/jpeg')
             expect(target.contentEncoding).to.equal(targetEncoding)
 
-            sourceEncoding === targetEncoding
+            isSameEncoding
               ? expect(target).to.equal(source)
               : expect(target).to.not.equal(source)
 
-            source.destroy() // cleanup
+            const actual = await target.toBuffer(true)
+            const expected = readFileSync(ENCODINGS.identity)
+            expect(actual).to.deep.equal(expected)
           })
         }
       }
@@ -231,6 +232,23 @@ describe('SmartStream', function () {
         expect(target.interval).to.be.a('number').to.equal(0)
 
         target.destroy() // cleanup
+      })
+
+      it('must clean up if the source errors out', function (done) {
+        const source = SmartStream.fromFile(__filename)
+        const msg = 'some useful error message'
+
+        SmartStream.fromStream(source)
+          .on('error', err => {
+            expect(err).to.be.an.instanceof(SmartStreamError)
+            expect(err.isUnexpected).to.equal(true)
+            expect(err.cause).to.be.an.instanceof(Error)
+            expect(err.cause.message).to.equal(msg)
+            done()
+          })
+          .once('end', () => done(new Error('should not have ended!')))
+
+        source.on('data', () => source.destroy(new Error(msg)))
       })
     })
   })
